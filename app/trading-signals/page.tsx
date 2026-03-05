@@ -2,15 +2,18 @@
 
 import { useState } from 'react';
 import TradingViewChart from '@/app/components/TradingViewChart';
-import TradingViewSignals from '@/app/components/TradingViewSignals';
+import DuneTable from '@/app/components/DuneTable';
 
 const ASSETS = [
-  { label: 'BTC / USDT', symbol: 'BINANCE:BTCUSDT' },
-  { label: 'ETH / USDT', symbol: 'BINANCE:ETHUSDT' },
-  { label: 'SOL / USDT', symbol: 'BINANCE:SOLUSDT' },
-  { label: 'S&P 500',    symbol: 'SP:SPX' },
-  { label: 'NASDAQ',     symbol: 'NASDAQ:NDX' },
-  { label: 'Gold',       symbol: 'TVC:GOLD' },
+  { label: 'BTC / USDT',      symbol: 'BINANCE:BTCUSDT' },
+  { label: 'ETH / USDT',      symbol: 'BINANCE:ETHUSDT' },
+  { label: 'SPX',             symbol: 'SP:SPX' },
+  { label: 'NDX',             symbol: 'NASDAQ:NDX' },
+  { label: 'KOSPI',           symbol: 'KRX:KOSPI' },
+  { label: 'HSI',             symbol: 'HSI:HSI' },
+  { label: 'VIX',             symbol: 'CBOE:VIX' },
+  { label: 'Gold (US$/OZ)',   symbol: 'TVC:GOLD' },
+  { label: 'Silver (US$/OZ)', symbol: 'TVC:SILVER' },
 ];
 
 export default function TradingSignalsPage() {
@@ -22,10 +25,12 @@ export default function TradingSignalsPage() {
 
       {/* Page Header */}
       <div className="mb-12 pb-10 border-b border-[var(--border-color)]">
-        <p className="text-xs font-mono text-[var(--accent-color)] uppercase tracking-widest mb-3">Live Market Data</p>
+        <p className="text-xs font-mono text-[var(--accent-color)] uppercase tracking-widest mb-3">
+          Live Market Data
+        </p>
         <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-4">Trading Signals</h1>
         <p className="text-[var(--text-secondary)] text-lg max-w-2xl">
-          Real-time technical analysis and indicator signals across crypto and traditional markets.
+          Real-time charts across crypto and traditional markets, combined with on-chain signal data.
         </p>
       </div>
 
@@ -46,38 +51,27 @@ export default function TradingSignalsPage() {
         ))}
       </div>
 
-      {/* Chart + Signals Grid */}
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+      {/* Full-width Chart */}
+      <div className="mb-4 flex items-center justify-between">
+        <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--text-secondary)]">
+          Price Chart — <span className="text-[var(--text-primary)]">{activeLabel}</span>
+        </h2>
+        <span className="text-xs font-mono text-[var(--text-secondary)] border border-[var(--border-color)] px-2 py-1">
+          Powered by TradingView
+        </span>
+      </div>
+      <TradingViewChart symbol={activeSymbol} height={560} />
 
-        {/* Main Chart — takes 2/3 width on xl screens */}
-        <div className="xl:col-span-2">
-          <div className="mb-3 flex items-center justify-between">
-            <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--text-secondary)]">
-              Price Chart — <span className="text-[var(--text-primary)]">{activeLabel}</span>
-            </h2>
-            <span className="text-xs font-mono text-[var(--text-secondary)] border border-[var(--border-color)] px-2 py-1">
-              Powered by TradingView
-            </span>
-          </div>
-          <TradingViewChart symbol={activeSymbol} height={520} />
-        </div>
-
-        {/* Technical Analysis Signals — 1/3 width on xl screens */}
-        <div className="xl:col-span-1">
-          <div className="mb-3">
-            <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--text-secondary)]">
-              Indicator Signals — <span className="text-[var(--text-primary)]">{activeLabel}</span>
-            </h2>
-          </div>
-          <TradingViewSignals symbol={activeSymbol} />
-        </div>
+      {/* Dune Analytics Signal Data */}
+      <div className="mt-16 pt-12 border-t border-[var(--border-color)]">
+        <DuneTable />
       </div>
 
-      {/* Info Footer */}
+      {/* Disclaimer */}
       <div className="mt-10 pt-8 border-t border-[var(--border-color)]">
         <p className="text-xs font-mono text-[var(--text-secondary)]">
-          Signals are derived from standard technical indicators (RSI, MACD, EMA, Stochastic, etc.) via TradingView.
-          Data is for informational purposes only and does not constitute financial advice.
+          Charts powered by TradingView. On-chain data sourced from Dune Analytics.
+          All data is for informational purposes only and does not constitute financial advice.
         </p>
       </div>
 
