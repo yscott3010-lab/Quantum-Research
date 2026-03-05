@@ -31,7 +31,7 @@ export async function GET() {
 
     const data = await res.json();
     return NextResponse.json(data);
-  } catch (err) {
+  } catch {
     return NextResponse.json(
       { error: 'Failed to fetch from Dune Analytics.' },
       { status: 500 }

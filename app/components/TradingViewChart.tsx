@@ -7,21 +7,28 @@ interface TradingViewChartProps {
   height?: number;
 }
 
-export default function TradingViewChart({ symbol = 'BINANCE:BTCUSDT', height = 500 }: TradingViewChartProps) {
+export default function TradingViewChart({
+  symbol = 'BINANCE:BTCUSDT',
+  height = 500,
+}: TradingViewChartProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!containerRef.current) return;
-    containerRef.current.innerHTML = '';
+    // Capture ref value at effect run time — safe for cleanup
+    const container = containerRef.current;
+    if (!container) return;
 
-    const widgetDiv = document.createElement('div');
-    widgetDiv.className = 'tradingview-widget-container__widget';
-    widgetDiv.style.height = '100%';
-    widgetDiv.style.width = '100%';
-    containerRef.current.appendChild(widgetDiv);
+    container.innerHTML = '';
+
+    const widgetWrapper = document.createElement('div');
+    widgetWrapper.className = 'tradingview-widget-container__widget';
+    widgetWrapper.style.height = '100%';
+    widgetWrapper.style.width = '100%';
+    container.appendChild(widgetWrapper);
 
     const script = document.createElement('script');
-    script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
+    script.src =
+      'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
     script.type = 'text/javascript';
     script.async = true;
     script.innerHTML = JSON.stringify({
@@ -35,18 +42,18 @@ export default function TradingViewChart({ symbol = 'BINANCE:BTCUSDT', height = 
       allow_symbol_change: true,
       support_host: 'https://www.tradingview.com',
     });
-    containerRef.current.appendChild(script);
+    container.appendChild(script);
 
     return () => {
-      if (containerRef.current) containerRef.current.innerHTML = '';
+      container.innerHTML = '';
     };
   }, [symbol]);
 
   return (
     <div
-      className="tradingview-widget-container w-full rounded border border-[var(--border-color)] overflow-hidden"
       ref={containerRef}
-      style={{ height }}
+      className="tradingview-widget-container w-full border border-[var(--border-color)]"
+      style={{ height, width: '100%' }}
     />
   );
 }

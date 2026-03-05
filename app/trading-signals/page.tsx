@@ -10,8 +10,8 @@ const ASSETS = [
   { label: 'SPX',             symbol: 'SP:SPX' },
   { label: 'NDX',             symbol: 'NASDAQ:NDX' },
   { label: 'KOSPI',           symbol: 'KRX:KOSPI' },
-  { label: 'HSI',             symbol: 'HSI:HSI' },
-  { label: 'VIX',             symbol: 'CBOE:VIX' },
+  { label: 'HSI',             symbol: 'TVC:HSI' },
+  { label: 'VIX',             symbol: 'TVC:VIX' },
   { label: 'Gold (US$/OZ)',   symbol: 'TVC:GOLD' },
   { label: 'Silver (US$/OZ)', symbol: 'TVC:SILVER' },
 ];

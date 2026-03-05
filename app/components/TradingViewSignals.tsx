@@ -6,15 +6,21 @@ interface TradingViewSignalsProps {
   symbol?: string;
 }
 
-export default function TradingViewSignals({ symbol = 'BINANCE:BTCUSDT' }: TradingViewSignalsProps) {
+export default function TradingViewSignals({
+  symbol = 'BINANCE:BTCUSDT',
+}: TradingViewSignalsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!containerRef.current) return;
-    containerRef.current.innerHTML = '';
+    // Capture ref value at effect run time — safe for cleanup
+    const container = containerRef.current;
+    if (!container) return;
+
+    container.innerHTML = '';
 
     const script = document.createElement('script');
-    script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js';
+    script.src =
+      'https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js';
     script.type = 'text/javascript';
     script.async = true;
     script.innerHTML = JSON.stringify({
@@ -28,18 +34,18 @@ export default function TradingViewSignals({ symbol = 'BINANCE:BTCUSDT' }: Tradi
       locale: 'en',
       colorTheme: 'dark',
     });
-    containerRef.current.appendChild(script);
+    container.appendChild(script);
 
     return () => {
-      if (containerRef.current) containerRef.current.innerHTML = '';
+      container.innerHTML = '';
     };
   }, [symbol]);
 
   return (
     <div
-      className="tradingview-widget-container w-full rounded border border-[var(--border-color)] overflow-hidden"
       ref={containerRef}
-      style={{ minHeight: 450 }}
+      className="tradingview-widget-container w-full border border-[var(--border-color)]"
+      style={{ minHeight: 450, width: '100%' }}
     />
   );
 }
