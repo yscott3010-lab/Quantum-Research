@@ -217,3 +217,51 @@ a:hover {
 .markdown-body li {
   margin-bottom: 0.5rem;
 }
+
+.markdown-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+  overflow-x: auto;
+  display: block;
+}
+
+.markdown-body thead tr {
+  border-bottom: 2px solid var(--accent-color);
+}
+
+.markdown-body th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.markdown-body td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  vertical-align: top;
+}
+
+.markdown-body tbody tr:hover td {
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+}
+
+.markdown-body a {
+  color: var(--accent-color);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.markdown-body a:hover {
+  text-decoration-color: var(--accent-color);
+}

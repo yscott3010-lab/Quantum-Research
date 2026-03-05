@@ -29,8 +29,8 @@ export default function RootLayout({
                 <Link href="/research" className="hover:text-[var(--text-primary)] transition-colors">
                   RESEARCH
                 </Link>
-                <Link href="/about" className="hover:text-[var(--text-primary)] transition-colors">
-                  FIRM
+                <Link href="/trading-signals" className="hover:text-[var(--text-primary)] transition-colors">
+                  SIGNALS
                 </Link>
                 <Link href="/team" className="hover:text-[var(--text-primary)] transition-colors">
                   TEAM
@@ -57,8 +57,8 @@ export default function RootLayout({
               </div>
               <div className="space-y-2 text-right">
                 <p><Link href="/research" className="hover:text-[var(--accent-color)]">Research Hub</Link></p>
-                <p><a href="https://twitter.com" target="_blank" className="hover:text-[var(--accent-color)]">Twitter</a></p>
-                <p><a href="https://github.com" target="_blank" className="hover:text-[var(--accent-color)]">GitHub</a></p>
+                <p><a href="https://x.com/eth_kim33" target="_blank" className="hover:text-[var(--accent-color)]">Twitter / X</a></p>
+                <p><a href="https://github.com/yscott3010-lab/Quantum-Research" target="_blank" className="hover:text-[var(--accent-color)]">GitHub</a></p>
               </div>
             </div>
           </footer>
