@@ -2,6 +2,15 @@
 
 import { useEffect, useRef } from 'react';
 
+// Tell TypeScript about the global TradingView object loaded by tv.js
+declare global {
+  interface Window {
+    TradingView?: {
+      widget: new (config: Record<string, unknown>) => void;
+    };
+  }
+}
+
 interface TradingViewChartProps {
   symbol?: string;
   height?: number;
@@ -9,40 +18,59 @@ interface TradingViewChartProps {
 
 export default function TradingViewChart({
   symbol = 'BINANCE:BTCUSDT',
-  height = 500,
+  height = 600,
 }: TradingViewChartProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Capture ref value at effect run time — safe for cleanup
     const container = containerRef.current;
     if (!container) return;
 
+    // Clear previous chart
     container.innerHTML = '';
 
-    const widgetWrapper = document.createElement('div');
-    widgetWrapper.className = 'tradingview-widget-container__widget';
-    widgetWrapper.style.height = '100%';
-    widgetWrapper.style.width = '100%';
-    container.appendChild(widgetWrapper);
+    // Create inner div with a unique ID — TradingView.widget needs a real DOM id
+    const uid = `tv_${Math.random().toString(36).slice(2, 9)}`;
+    const chartDiv = document.createElement('div');
+    chartDiv.id = uid;
+    chartDiv.style.height = '100%';
+    chartDiv.style.width = '100%';
+    container.appendChild(chartDiv);
 
-    const script = document.createElement('script');
-    script.src =
-      'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
-    script.type = 'text/javascript';
-    script.async = true;
-    script.innerHTML = JSON.stringify({
-      autosize: true,
-      symbol,
-      interval: 'D',
-      timezone: 'Etc/UTC',
-      theme: 'dark',
-      style: '1',
-      locale: 'en',
-      allow_symbol_change: true,
-      support_host: 'https://www.tradingview.com',
-    });
-    container.appendChild(script);
+    const createWidget = () => {
+      if (!window.TradingView) return;
+      new window.TradingView.widget({
+        container_id: uid,
+        autosize: true,
+        symbol,
+        interval: 'D',
+        timezone: 'Etc/UTC',
+        theme: 'dark',
+        style: '1',
+        locale: 'en',
+        toolbar_bg: '#000000',
+        enable_publishing: false,
+        allow_symbol_change: true,
+        hide_side_toolbar: false,
+      });
+    };
+
+    if (window.TradingView) {
+      // tv.js already loaded from a previous render
+      createWidget();
+    } else {
+      // Check if the script tag is already in the document (another instance added it)
+      const existing = document.querySelector('script[src="https://s3.tradingview.com/tv.js"]');
+      if (existing) {
+        existing.addEventListener('load', createWidget);
+      } else {
+        const script = document.createElement('script');
+        script.src = 'https://s3.tradingview.com/tv.js';
+        script.async = true;
+        script.onload = createWidget;
+        document.head.appendChild(script);
+      }
+    }
 
     return () => {
       container.innerHTML = '';
@@ -52,7 +80,7 @@ export default function TradingViewChart({
   return (
     <div
       ref={containerRef}
-      className="tradingview-widget-container w-full border border-[var(--border-color)]"
+      className="w-full border border-[var(--border-color)]"
       style={{ height, width: '100%' }}
     />
   );

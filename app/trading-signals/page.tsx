@@ -2,16 +2,15 @@
 
 import { useState } from 'react';
 import TradingViewChart from '@/app/components/TradingViewChart';
-import DuneCharts from '@/app/components/DuneCharts';
 
 const ASSETS = [
   { label: 'BTC / USDT',      symbol: 'BINANCE:BTCUSDT' },
   { label: 'ETH / USDT',      symbol: 'BINANCE:ETHUSDT' },
-  { label: 'S&P 500',         symbol: 'FOREXCOM:SPXUSD' },
-  { label: 'NASDAQ 100',      symbol: 'FOREXCOM:NASUSD' },
-  { label: 'KOSPI',           symbol: 'KRXKOSPI:KOSPI' },
-  { label: 'Hang Seng',       symbol: 'TVC:HSI' },
-  { label: 'VIX',             symbol: 'TVC:VIX' },
+  { label: 'S&P 500',         symbol: 'SP:SPX' },
+  { label: 'NASDAQ 100',      symbol: 'NASDAQ:NDX' },
+  { label: 'KOSPI',           symbol: 'KRX:KOSPI' },
+  { label: 'Hang Seng',       symbol: 'HSI:HSI' },
+  { label: 'VIX',             symbol: 'CBOE:VIX' },
   { label: 'Gold (US$/OZ)',   symbol: 'TVC:GOLD' },
   { label: 'Silver (US$/OZ)', symbol: 'TVC:SILVER' },
 ];
@@ -30,7 +29,7 @@ export default function TradingSignalsPage() {
         </p>
         <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-4">Trading Signals</h1>
         <p className="text-[var(--text-secondary)] text-lg max-w-2xl">
-          Real-time charts across crypto and traditional markets, combined with on-chain signal data.
+          Real-time charts across crypto and traditional markets.
         </p>
       </div>
 
@@ -51,8 +50,8 @@ export default function TradingSignalsPage() {
         ))}
       </div>
 
-      {/* Full-width TradingView Chart */}
-      <div className="mb-4 flex items-center justify-between">
+      {/* Label row */}
+      <div className="mb-3 flex items-center justify-between">
         <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--text-secondary)]">
           Price Chart — <span className="text-[var(--text-primary)]">{activeLabel}</span>
         </h2>
@@ -60,18 +59,14 @@ export default function TradingSignalsPage() {
           Powered by TradingView
         </span>
       </div>
-      <TradingViewChart symbol={activeSymbol} height={560} />
 
-      {/* Dune Analytics Charts */}
-      <div className="mt-16 pt-12 border-t border-[var(--border-color)]">
-        <DuneCharts />
-      </div>
+      {/* Full-height TradingView chart */}
+      <TradingViewChart symbol={activeSymbol} height={700} />
 
       {/* Disclaimer */}
-      <div className="mt-10 pt-8 border-t border-[var(--border-color)]">
+      <div className="mt-8 pt-6 border-t border-[var(--border-color)]">
         <p className="text-xs font-mono text-[var(--text-secondary)]">
-          Charts powered by TradingView. On-chain data sourced from Dune Analytics.
-          All data is for informational purposes only and does not constitute financial advice.
+          Charts powered by TradingView. All data is for informational purposes only and does not constitute financial advice.
         </p>
       </div>
 
