@@ -2,15 +2,15 @@
 
 import { useState } from 'react';
 import TradingViewChart from '@/app/components/TradingViewChart';
-import DuneTable from '@/app/components/DuneTable';
+import DuneCharts from '@/app/components/DuneCharts';
 
 const ASSETS = [
   { label: 'BTC / USDT',      symbol: 'BINANCE:BTCUSDT' },
   { label: 'ETH / USDT',      symbol: 'BINANCE:ETHUSDT' },
-  { label: 'SPX',             symbol: 'SP:SPX' },
-  { label: 'NDX',             symbol: 'NASDAQ:NDX' },
-  { label: 'KOSPI',           symbol: 'KRX:KOSPI' },
-  { label: 'HSI',             symbol: 'TVC:HSI' },
+  { label: 'S&P 500',         symbol: 'FOREXCOM:SPXUSD' },
+  { label: 'NASDAQ 100',      symbol: 'FOREXCOM:NASUSD' },
+  { label: 'KOSPI',           symbol: 'KRXKOSPI:KOSPI' },
+  { label: 'Hang Seng',       symbol: 'TVC:HSI' },
   { label: 'VIX',             symbol: 'TVC:VIX' },
   { label: 'Gold (US$/OZ)',   symbol: 'TVC:GOLD' },
   { label: 'Silver (US$/OZ)', symbol: 'TVC:SILVER' },
@@ -51,7 +51,7 @@ export default function TradingSignalsPage() {
         ))}
       </div>
 
-      {/* Full-width Chart */}
+      {/* Full-width TradingView Chart */}
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--text-secondary)]">
           Price Chart — <span className="text-[var(--text-primary)]">{activeLabel}</span>
@@ -62,9 +62,9 @@ export default function TradingSignalsPage() {
       </div>
       <TradingViewChart symbol={activeSymbol} height={560} />
 
-      {/* Dune Analytics Signal Data */}
+      {/* Dune Analytics Charts */}
       <div className="mt-16 pt-12 border-t border-[var(--border-color)]">
-        <DuneTable />
+        <DuneCharts />
       </div>
 
       {/* Disclaimer */}
