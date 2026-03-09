@@ -6,11 +6,11 @@ import TradingViewChart from '@/app/components/TradingViewChart';
 const ASSETS = [
   { label: 'BTC / USDT',      symbol: 'BINANCE:BTCUSDT' },
   { label: 'ETH / USDT',      symbol: 'BINANCE:ETHUSDT' },
-  { label: 'S&P 500',         symbol: 'SPREADEX:SPCFD' },
+  { label: 'S&P 500',         symbol: 'FOREXCOM:SPX500' },
   { label: 'NASDAQ 100',      symbol: 'NASDAQ:NDX' },
   { label: 'KOSPI',           symbol: 'KRX:KOSPI' },
   { label: 'Hang Seng',       symbol: 'TVC:HSI' },
-  { label: 'VIX',             symbol: 'CBOE:VIX' },
+  { label: 'VIX',             symbol: 'TVC:VIX' },
   { label: 'Gold (US$/OZ)',   symbol: 'TVC:GOLD' },
   { label: 'Silver (US$/OZ)', symbol: 'TVC:SILVER' },
 ];
