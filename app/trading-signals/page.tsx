@@ -10,7 +10,7 @@ const ASSETS = [
   { label: 'NASDAQ 100',      symbol: 'OANDA:NAS100USD' },
   { label: 'KOSPI',           symbol: 'TVC:KOSPI' },
   { label: 'Hang Seng',       symbol: 'OANDA:HK33HKD' },
-  { label: 'VIX',             symbol: 'CBOE:VIX' },
+  { label: 'VIX',             symbol: 'CAPITALCOM:VIX' },
   { label: 'Gold (US$/OZ)',   symbol: 'TVC:GOLD' },
   { label: 'Silver (US$/OZ)', symbol: 'TVC:SILVER' },
 ];
