@@ -176,7 +176,7 @@ export default function MarketTreemap({ type }: { type: 'sp500' | 'futures' }) {
             dataKey="size"
             aspectRatio={16 / 9}
             isAnimationActive={false}
-            content={(props) => <CustomContent {...(props as Record<string, unknown>)} />}
+            content={<CustomContent />}
           >
             <Tooltip content={(props) => <MapTooltip {...(props as { active?: boolean; payload?: Array<{ payload: MapItem }> })} />} />
           </Treemap>
