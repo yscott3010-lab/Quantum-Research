@@ -32,6 +32,9 @@ export default function RootLayout({
                 <Link href="/trading-signals" className="hover:text-[var(--text-primary)] transition-colors">
                   SIGNALS
                 </Link>
+                <Link href="/maps" className="hover:text-[var(--text-primary)] transition-colors">
+                  MAPS
+                </Link>
                 <Link href="/onchain" className="hover:text-[var(--text-primary)] transition-colors">
                   ON-CHAIN
                 </Link>
