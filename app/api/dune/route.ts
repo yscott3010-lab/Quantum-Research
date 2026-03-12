@@ -14,11 +14,11 @@ export async function GET() {
 
   try {
     const res = await fetch(
-      `https://api.dune.com/api/v1/query/${DUNE_QUERY_ID}/results?limit=1000`,
+      `https://api.dune.com/api/v1/query/${DUNE_QUERY_ID}/results?limit=5000&sort_by=day+asc`,
       {
         headers: { 'x-dune-api-key': apiKey },
-        // Revalidate every 5 minutes
-        next: { revalidate: 300 },
+        // Revalidate every hour — cron refreshes the query daily
+        next: { revalidate: 3600 },
       }
     );
 
